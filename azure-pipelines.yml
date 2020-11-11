@@ -36,6 +36,7 @@ jobs:
 
   - script: |
       call activate myEnvironment
+      conda config --add channels conda-forge
       conda install --yes --quiet --name myEnvironment python=%PYTHON_VERSION% numpy
     displayName: Install Anaconda packages
 
