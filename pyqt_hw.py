@@ -1,4 +1,4 @@
-from PySide2 import QtWidgets, QtCore, QtGui
+from qtpy import QtWidgets, QtCore, QtGui
 import sys
 
 class MyWindow(QtWidgets.QMainWindow):
