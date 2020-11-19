@@ -11,4 +11,4 @@ def test_main():
     app = QtWidgets.QApplication(sys.argv)
     my_win = MyWindow()
     my_win.show()
-    sys.exit(app.exec_())
+    app.exec_()
