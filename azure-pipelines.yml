@@ -13,10 +13,22 @@ jobs:
       brew cask install xquartz
     displayName: install X11
 
+  - bash: echo "##vso[task.prependpath]$CONDA/bin"
+    displayName: Add conda to PATH
+
+  - bash: sudo chown -R $USER $CONDA
+    displayName: Take ownership of conda installation
+
   - bash: |
-
-    displayName: FIND
-
+      set -x -e
+      conda config --add channels conda-forge
+      conda update -y --all
+      # these ones are not in the 2020.1 conda build yet
+      conda install -y pytest-xvfb pyqt
+      # these are buildtime, not a runtime,  deps for our conda package
+      conda install -y cython pytest-cov pytest
+      pytest pyqt*py
+    displayName: Configure conda and conda-build
 
 - job:
   displayName: windows-2019
