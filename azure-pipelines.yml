@@ -24,7 +24,7 @@ jobs:
       conda config --add channels conda-forge
       conda update -y --all
       # these ones are not in the 2020.1 conda build yet
-      conda install -y pytest-xvfb pyside
+      conda install -y pytest-xvfb pyside2
       # these are buildtime, not a runtime,  deps for our conda package
       conda install -y cython pytest-cov pytest
       pytest pyqt*py
