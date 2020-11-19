@@ -27,6 +27,9 @@ jobs:
       conda install -y pytest-xvfb pyside2 pyqt
       # these are buildtime, not a runtime,  deps for our conda package
       conda install -y cython pytest-cov pytest
+      pip install -r requirements.txt
+      pip install -r requirements-ci.txt
+      pip install -r requirements-optional.txt
       pytest pyqt*py
     displayName: Configure conda and conda-build
 
