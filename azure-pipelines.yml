@@ -25,7 +25,7 @@ jobs:
       conda update -y --all
       conda install -y --only-deps pymor
       # these ones are not in the 2020.1 conda build yet
-      conda install -y pytest-xvfb pyside2 pyqt
+      conda install -y pytest-xvfb pyside2 pyqt pyevtk mpi4py slycot pytorch pytest-xvfb
       # these are buildtime, not a runtime,  deps for our conda package
       conda install -y cython pytest-cov pytest
       pip install -r requirements.txt
