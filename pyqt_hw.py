@@ -1,4 +1,5 @@
 from PyQt5 import QtWidgets, QtCore, QtGui
+import sys
 
 class MyWindow(QtWidgets.QMainWindow):
     """Auto-closing window"""
