@@ -1,38 +1,5 @@
 jobs:
-- job:
-  displayName: macOS-10.15
-  pool:
-    vmImage: 'macOS-10.15'
-  strategy:
-    matrix:
-      Python36:
-        python.version: '3.6'
 
-  steps:
-  - script: |
-      brew cask install xquartz
-    displayName: install X11
-
-  - bash: echo "##vso[task.prependpath]$CONDA/bin"
-    displayName: Add conda to PATH
-
-  - bash: sudo chown -R $USER $CONDA
-    displayName: Take ownership of conda installation
-
-  - bash: |
-      set -x -e
-      conda config --add channels conda-forge
-      conda update -y --all
-      conda install -y --only-deps pymor
-      # these ones are not in the 2020.1 conda build yet
-      conda install -y pytest-xvfb pyside2 pyqt pyevtk mpi4py slycot pytorch pytest-xvfb
-      # these are buildtime, not a runtime,  deps for our conda package
-      conda install -y cython pytest-cov pytest
-      pip install -r requirements.txt
-      pip install -r requirements-ci.txt
-      pip install -r requirements-optional.txt
-      pytest pyqt*py
-    displayName: Configure conda and conda-build
 
 - job:
   displayName: windows-2019
@@ -56,6 +23,8 @@ jobs:
 
   - script: |
       call activate base
-      pip install pytest pytest-azurepipelines
-      pytest
+      pip install pytest pytest-azurepipelines pytest-cov
+      pytest pyqt*py
+      coverage xml
+      codecov.exe -f coverage.xml
     displayName: pytest
